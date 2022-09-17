@@ -73,6 +73,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-console */
 var express_1 = __importDefault(require("express"));
 var morgan_1 = __importDefault(require("morgan"));
 var dotenv = __importStar(require("dotenv"));
@@ -83,7 +85,7 @@ var app = (0, express_1.default)();
 // HTTP request logger middleware
 app.use((0, morgan_1.default)('short'));
 // add routing for / path
-app.get('/', function (req, res) {
+app.get('/', function (_req, res) {
     res.json({
         message: 'Hello World 🌍'
     });
@@ -95,9 +97,9 @@ app.listen(PORT, function () {
 exports.default = app;
 // Import readline module for getting input from console
 // Find more here: https://nodejs.org/api/readline.html#readline_readline
-var readline = require('readline');
+var readline_1 = __importDefault(require("readline"));
 // define question/output interface
-var rl = readline.createInterface({
+var rl = readline_1.default.createInterface({
     // readable stream
     input: process.stdin,
     // writeable stream
@@ -105,7 +107,7 @@ var rl = readline.createInterface({
 });
 // Create questions for STDIN Input from console.
 var menuQ = function () {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function (resolve, _reject) {
         // (readable, writeable from readline interface)
         rl.question('Your choice: ', function (answer) {
             resolve(answer);
@@ -113,21 +115,21 @@ var menuQ = function () {
     });
 };
 var milkQ = function () {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function (resolve, _reject) {
         rl.question('How many cups of milk to add? ', function (answer) {
             resolve(answer);
         });
     });
 };
 var espressoQ = function () {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function (resolve, _reject) {
         rl.question('How many shots of espresso to add? ', function (answer) {
             resolve(answer);
         });
     });
 };
 var peppermintQ = function () {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function (resolve, _reject) {
         rl.question('How many shots of peppermint to add? ', function (answer) {
             resolve(answer);
         });
