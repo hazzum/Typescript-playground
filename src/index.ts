@@ -2,8 +2,9 @@
 /* eslint-disable no-console */
 import express, { application, Application, Request, Response } from 'express'
 import morgan from 'morgan'
-import logger from './utilities/logger';
-import routes from './routes/index';
+import logger from './utilities/logger'
+import routes from './routes/index'
+
 import * as dotenv from 'dotenv'
 
 dotenv.config()
