@@ -29,16 +29,25 @@ const app: Application = express()
 // add routing for / path
 app.get('/convert', (_req: Request, res: Response) => {
   const convertFile = async () => {
-    const jsonArray = await cjs().fromFile(csvFilePath)
-    const writeData = async () => { await fs.writeFile(path.join(__dirname, 'users.json'), JSON.stringify(jsonArray)) }
-    writeData()
-    try {
-      const readFile = await fs.readFile(path.join(__dirname, 'users.json'), 'utf8')
-      res.status(200).json(JSON.parse(readFile))
-    }
-    catch (error) {
-      res.status(400).json({ message: error })
-    }
+    cjs().fromFile(csvFilePath).then(async (jsonObj) => {
+      const jsonArray = jsonObj.map((item) => {
+        const temp = {
+          first_name: item.first_name,
+          last_name: item.last_name,
+          phone: item.phone == "" ? "missing data" : item.phone
+        }
+        return temp
+      })
+      const writeData = async () => { await fs.writeFile(path.join(__dirname, 'users.json'), JSON.stringify(jsonArray)) }
+      writeData()
+      try {
+        const readFile = await fs.readFile(path.join(__dirname, 'users.json'), 'utf8')
+        res.status(200).json(JSON.parse(readFile))
+      }
+      catch (error) {
+        res.status(400).json({ message: error })
+      }
+    })
   }
   try {
     convertFile()
